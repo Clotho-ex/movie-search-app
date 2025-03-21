@@ -25,6 +25,7 @@
     font-family: "DM Sans", serif;
     font-optical-sizing: auto;
     background: #030014;
+    overflow-x: hidden;
   }
 
   h1 {
@@ -58,7 +59,11 @@
   }
 
   .trending {
-    @apply mt-20;
+    @apply mt-30;
+
+    :focus {
+      @apply outline-none ring-1 ring-indigo-500 ring-offset-2 ring-offset-indigo-500 rounded-lg;
+    }
 
     & ul {
       @apply flex flex-row overflow-y-auto gap-5 -mt-10 w-full hide-scrollbar;

@@ -4,7 +4,9 @@ const MovieCard = ({
   movie: { title, vote_average, poster_path, release_date, original_language },
 }) => {
   return (
-    <div className="movie-card">
+    <div
+      className="movie-card focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-indigo-500 focus:rounded-lg"
+      tabIndex="0">
       <img
         src={
           poster_path
