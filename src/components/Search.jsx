@@ -1,8 +1,19 @@
 import React from "react";
 
 const Search = ({ searchTerm, setSearchTerm }) => {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // Remove focus from the input to prevent unwanted scrolling
+    const input = event.target.querySelector("input");
+    if (input) input.blur();
+  };
+
+  const handleChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
   return (
-    <form role="search" className="search">
+    <form role="search" className="search" onSubmit={handleSubmit}>
       <label htmlFor="search-input" className="sr-only">
         Search through thousands of movies
       </label>
@@ -14,7 +25,7 @@ const Search = ({ searchTerm, setSearchTerm }) => {
           type="text"
           placeholder="Search through thousands of movies"
           value={searchTerm}
-          onChange={(event) => setSearchTerm(event.target.value)}
+          onChange={handleChange}
           aria-label="Search movies"
         />
       </div>

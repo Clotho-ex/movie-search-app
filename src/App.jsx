@@ -25,6 +25,7 @@ function App() {
 
   const [trendingMovies, setTrendingMovies] = useState([]);
 
+  // Debounce the searchTerm
   useDebounce(() => setDebouncedSearch(searchTerm), 500, [searchTerm]);
 
   const fetchMovies = async (query = "") => {
@@ -50,7 +51,7 @@ function App() {
         await updateSearchCount(query, data.results[0]);
       }
     } catch (error) {
-      console.error(`Error fething movies: ${error}`);
+      console.error(`Error fetching movies: ${error}`);
       setErrorMessage("Error fetching movies. Please try again later.");
     } finally {
       setIsLoading(false);
@@ -66,13 +67,25 @@ function App() {
     }
   };
 
+  // Fetch movies when the debounced search value changes.
   useEffect(() => {
     fetchMovies(debouncedSearch);
   }, [debouncedSearch]);
 
+  // Load trending movies on initial mount.
   useEffect(() => {
     loadTrendingMovies();
   }, []);
+
+  // When a search is triggered, scroll to the "All Movies" section.
+  useEffect(() => {
+    if (debouncedSearch.trim() !== "") {
+      const section = document.getElementById("all-movies");
+      if (section) {
+        section.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [debouncedSearch]);
 
   return (
     <main>
@@ -88,7 +101,7 @@ function App() {
         </header>
 
         {trendingMovies.length > 0 && (
-          <section className="trending ">
+          <section className="trending">
             <h2>Trending Movies</h2>
             <ul>
               {trendingMovies.map((movie, index) => (
@@ -101,12 +114,12 @@ function App() {
           </section>
         )}
 
-        <section className="all-movies">
+        <section id="all-movies" className="all-movies">
           <h2>All Movies</h2>
           {isLoading ? (
             <Spinner />
           ) : errorMessage ? (
-            <p className="text-red-500">{error}</p>
+            <p className="text-red-500">{errorMessage}</p>
           ) : (
             <ul>
               {movieList.map((movie) => (
