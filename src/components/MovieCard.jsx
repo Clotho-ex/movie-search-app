@@ -10,10 +10,11 @@ const MovieCard = ({
       <img
         src={
           poster_path
-            ? `https://image.tmdb.org/t/p/w500/${poster_path}`
+            ? `https://image.tmdb.org/t/p/w342/${poster_path}`
             : "/no-movie.png"
         }
         alt={title}
+        loading="lazy"
       />
       <div className="mt-4">
         <h3>{title}</h3>
