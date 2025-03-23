@@ -79,7 +79,7 @@ function App() {
       <div className="pattern" />
       <div className="wrapper">
         <header>
-          <img src="./hero.webp" alt="hero banner" loading="lazy" />
+          <img src="./hero.webp" alt="hero banner" />
           <h1>
             Find <span className="text-gradient">Movies</span> You'll Enjoy
             Without Hassle
